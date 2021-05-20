@@ -32,8 +32,8 @@ done
 for i in ${!HOSTS[*]} ; do
      echo "set static IP"
      echo ${HOSTS[i]}
-     sshpass -o StrictHostKeyChecking=no -p ${NEW_PASS} ssh -l ${USERNAMES[i]} ${HOSTS[i]} <<EOF
-          cat > /etc/netplan/50-cloud-init.yaml <<EOF
+     sshpass -o StrictHostKeyChecking=no -p ${NEW_PASS} ssh -l ${USERNAMES[i]} ${HOSTS[i]} <<-EOF1
+          cat > /etc/netplan/50-cloud-init.yaml <<-EOF2
                network:
                  version: 2
                  renderer: networkd
@@ -44,6 +44,6 @@ for i in ${!HOSTS[*]} ; do
                     gateway4: 192.168.0.1
                     nameservers:
                       addresses: [8.8.8.8,8.8.4.4]
-          EOF
-     EOF
+          EOF2
+     EOF1
 done
